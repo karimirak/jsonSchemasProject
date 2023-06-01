@@ -33,12 +33,32 @@ def load_js():
         unsafe_allow_html=True
         )
 
+    # methode 2
+    jsoneditor_bundle = "https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/jsoneditor.min.js"
+    components.html(
+        f"""
+            <script src="{jsoneditor_bundle}"></script>
+            <div id="jsoneditor" style="height: 600px;"></div>
+            <button onclick="loadJSON()">Load JSON</button>
+            <script>
+                function loadJSON() {{
+                    console.log('test méthode 1')
+                    const element = document.getElementById('jsoneditor');
+                    const editor = new JSONEditor(element, options);
+                    JSONEditor.defaults.options.theme = 'bootstrap4';
+
+                }}
+            </script>
+            """
+    )
+
     st.markdown("""
        <script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/jsoneditor.min.js"></script>
        <div id="jsoneditor" style="height: 600px;"></div>
        <button onclick="loadJSON()">Load JSON</button>
             <script>
                 function loadJSON() {{
+                    console.log('test méthode 2')
                     const element = document.getElementById('jsoneditor');
                     const editor = new JSONEditor(element, options);
                     JSONEditor.defaults.options.theme = 'bootstrap4';
@@ -49,23 +69,7 @@ def load_js():
         unsafe_allow_html=True
         )
 
-    # methode 2
-    # jsoneditor_bundle = "https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/jsoneditor.min.js"
-    # components.html(
-    #     f"""
-    #         <script src="{jsoneditor_bundle}"></script>
-    #         <div id="jsoneditor" style="height: 600px;"></div>
-    #         <button onclick="loadJSON()">Load JSON</button>
-    #         <script>
-    #             function loadJSON() {{
-    #                 const element = document.getElementById('jsoneditor');
-    #                 const editor = new JSONEditor(element, options);
-    #                 JSONEditor.defaults.options.theme = 'bootstrap4';
-    #
-    #             }}
-    #         </script>
-    #         """
-    # )
+
 
 
     with open('schema.json', 'r') as file:
